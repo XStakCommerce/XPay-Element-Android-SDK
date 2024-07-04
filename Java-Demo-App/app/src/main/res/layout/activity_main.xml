@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Centering RelativeLayout -->
+    <RelativeLayout
+        android:id="@+id/centeredContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"> <!-- This attribute centers the layout -->
+
+        <!-- Element View Placeholder, which might be populated dynamically -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/elementView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Pay Button -->
+        <Button
+            android:id="@+id/payButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pay PKR 5.00"
+            android:background="@drawable/rounded_button"
+            android:layout_below="@+id/elementView"
+            android:enabled="false"
+            android:layout_marginTop="24dp"/>
+
+        <!-- Clear Button, positioned below Pay Button -->
+        <Button
+            android:id="@+id/clearButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clear"
+            android:background="@drawable/rounded_button"
+            android:layout_below="@+id/payButton"
+            android:layout_marginTop="8dp"/>
+    </RelativeLayout>
+</RelativeLayout>
