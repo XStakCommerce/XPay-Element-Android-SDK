@@ -5,7 +5,8 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
+import android.os.Handler;
+import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.xstak.xpay_element.PaymentElement;
@@ -159,16 +160,23 @@ public class MainActivity extends AppCompatActivity {
         clearButton.setOnClickListener(v -> paymentElement.clear());
     }
 
+     Handler handler = new Handler(Looper.getMainLooper());
     private Unit paymentResponse(String response) {
-        try {
-            Log.e("Payment Response Data", response);
-            JSONObject jsonObject = new JSONObject(response);
-            String message = jsonObject.getString("message");
-            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            return Unit.INSTANCE;
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Log.e("Payment Response Data", response);
+                    JSONObject jsonObject = new JSONObject(response);
+                    String message = jsonObject.getString("message");
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        return Unit.INSTANCE;
     }
 
     private void makeNetworkRequest(String url, String method, String bodyJson, CallbackResponse onSuccess, CallbackError onFailure) {
